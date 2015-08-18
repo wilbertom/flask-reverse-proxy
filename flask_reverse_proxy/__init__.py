@@ -48,9 +48,10 @@ class ReverseProxied(object):
         server = environ.get('HTTP_X_FORWARDED_SERVER_CUSTOM', '')
         if server:
             environ['HTTP_HOST'] = server
-        server = environ.get('HTTP_X_FORWARDED_SERVER', '')
-        if server:
-            environ['HTTP_HOST'] = server
+        else:
+            server = environ.get('HTTP_X_FORWARDED_SERVER', '')
+            if server:
+                environ['HTTP_HOST'] = server
 
         scheme = environ.get('HTTP_X_SCHEME', '')
 
