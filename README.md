@@ -42,7 +42,7 @@ server {
 
 Usage:
 
-```
+```python
 
 from flask_reverse_proxy import FlaskReverseProxied
 
@@ -51,7 +51,7 @@ proxied = FlaskReverseProxied(app)
 ```
 
 
-```
+```python
 
 from flask_reverse_proxy import FlaskReverseProxied
 
