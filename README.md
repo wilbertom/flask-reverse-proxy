@@ -40,6 +40,19 @@ server {
 
 ```
 
+A basic apache example:
+
+```
+<IfModule !proxy_module>
+LoadModule proxy_module modules/mod_proxy.so
+</IfModule>
+<IfModule !proxy_http_module>
+LoadModule proxy_http_module modules/mod_proxy_http.so
+</IfModule>
+ProxyPass /production/ http://localhost:15970/production/
+ProxyPassReverse /production/ http://localhost:15970/production/
+```
+
 Usage:
 
 ```python
