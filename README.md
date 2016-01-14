@@ -49,8 +49,10 @@ LoadModule proxy_module modules/mod_proxy.so
 <IfModule !proxy_http_module>
 LoadModule proxy_http_module modules/mod_proxy_http.so
 </IfModule>
-ProxyPass /production/ http://localhost:15970/production/
-ProxyPassReverse /production/ http://localhost:15970/production/
+ProxyPass /production/ http://localhost:8001/production/
+ProxyPassReverse /production/ http://localhost:8001/production/
+ProxyPass /staging/ http://localhost:8002/staging/
+ProxyPassReverse /staging/ http://localhost:8002/staging/
 ```
 
 Usage:
