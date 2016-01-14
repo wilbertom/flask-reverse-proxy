@@ -43,16 +43,43 @@ server {
 A basic apache example:
 
 ```
+File 1:
 <IfModule !proxy_module>
 LoadModule proxy_module modules/mod_proxy.so
 </IfModule>
 <IfModule !proxy_http_module>
 LoadModule proxy_http_module modules/mod_proxy_http.so
 </IfModule>
+
+#SetEnvIf Request_URI ^/production production
+#SetEnvIf Request_URI ^/staging staging
+
+#RequestHeader set X-Scheme https
+#RequestHeader set X-Script-Name "/production" env=production
+#RequestHeader set X-Script-Name "/staging" env=staging
+#RequestHeader set X-Forwarded-Server-Custom "EXTERNAL HOST NAME"
+
+#For a local proxy only:
 ProxyPass /production/ http://localhost:8001/production/
 ProxyPassReverse /production/ http://localhost:8001/production/
 ProxyPass /staging/ http://localhost:8002/staging/
 ProxyPassReverse /staging/ http://localhost:8002/staging/
+
+#If you are passing through to another host:
+#<Proxy http://puppetmasterci01.int.ci.lan:80>
+#    ProxySet connectiontimeout=5 timeout=90
+#</Proxy>
+
+# Proxy for _aliases and .*/_search
+#<LocationMatch "^/(production)(.*)$">
+#    ProxyPassMatch http://HOSTNAME:8001/$1$2
+#    ProxyPassReverse http://HOSTNAME:8001/$1$2
+#</LocationMatch>
+#<LocationMatch "^/(staging)(.*)$">
+#    ProxyPassMatch http://HOSTNAME:8002/$1$2
+#    ProxyPassReverse http://HOSTNAME:8002/$1$2
+#</LocationMatch>
+
 ```
 
 Usage:
