@@ -65,18 +65,18 @@ ProxyPass /staging/ http://localhost:8002/staging/
 ProxyPassReverse /staging/ http://localhost:8002/staging/
 
 #If you are passing through to another host:
-#<Proxy http://puppetmasterci01.int.ci.lan:80>
+#<Proxy http://NEWHOSTNAME:80>
 #    ProxySet connectiontimeout=5 timeout=90
 #</Proxy>
 
 # Proxy for _aliases and .*/_search
 #<LocationMatch "^/(production)(.*)$">
-#    ProxyPassMatch http://HOSTNAME:8001/$1$2
-#    ProxyPassReverse http://HOSTNAME:8001/$1$2
+#    ProxyPassMatch http://NEWHOSTNAME:8001/$1$2
+#    ProxyPassReverse http://NEWHOSTNAME:8001/$1$2
 #</LocationMatch>
 #<LocationMatch "^/(staging)(.*)$">
-#    ProxyPassMatch http://HOSTNAME:8002/$1$2
-#    ProxyPassReverse http://HOSTNAME:8002/$1$2
+#    ProxyPassMatch http://NEWHOSTNAME:8002/$1$2
+#    ProxyPassReverse http://NEWHOSTNAME:8002/$1$2
 #</LocationMatch>
 
 ```
