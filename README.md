@@ -43,7 +43,6 @@ server {
 A basic apache example:
 
 ```
-File 1:
 <IfModule !proxy_module>
 LoadModule proxy_module modules/mod_proxy.so
 </IfModule>
